@@ -1,8 +1,7 @@
 import type { Case, CaseCreate, Subject, SubjectCreate, SubjectUpdate, InvestigationJob, Report } from "@/types";
 import { supabase } from "./supabase";
 
-// All requests go through Next.js rewrite proxy → avoids CORS entirely
-const BASE = "/api/backend";
+const BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   // Attach the current user's access token so the backend can verify identity
